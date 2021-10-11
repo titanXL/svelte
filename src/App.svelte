@@ -1,11 +1,16 @@
 <script lang="ts">
-  import { toasts } from "./stores/toasts";
+  import { createStore, RemoveToast } from "./stores/toasts";
   import Toast from "./Toast.svelte";
+  import type { ToastMessage } from "./types";
+
+  const toasts = createStore();
+
+  const onClick: RemoveToast = (id) => toasts.remove(id);
 </script>
 
 <main>
   {#each $toasts as toast (toast.id)}
-    <Toast {toast} />
+    <Toast {toast} {onClick} />
   {/each}
 </main>
 

@@ -2,7 +2,7 @@ import { writable } from "svelte/store";
 
 import type { ToastMessage } from "../types";
 
-let toastsState: ToastMessage[] = [
+const INITIAL_STATE: ToastMessage[] = [
   {
     id: "1",
     message: "Success",
@@ -20,4 +20,15 @@ let toastsState: ToastMessage[] = [
   },
 ];
 
-export const toasts = writable(toastsState);
+export const createStore = (state = INITIAL_STATE) => {
+  const { update, subscribe } = writable(state);
+
+  return {
+    subscribe,
+    add: (toast: ToastMessage) => update((s) => [...s, toast]),
+    remove: (id: ToastMessage["id"]) =>
+      update((s) => s.filter((t) => t.id !== id)),
+  };
+};
+
+export type RemoveToast = ReturnType<typeof createStore>["remove"];
