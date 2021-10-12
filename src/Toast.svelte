@@ -7,6 +7,6 @@
   export let onClick: RemoveToast;
 </script>
 
-<div on:click={() => onClick(toast.id)}>
+<div class="bg-green-100" on:click={() => onClick(toast.id)}>
   <p>{toast.message}</p>
 </div>
