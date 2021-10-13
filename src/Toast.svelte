@@ -19,6 +19,11 @@
 
   const borderColor = `border-${colorsMap[toast.type]}-300`;
 
+  const className =
+    toast.type === "success"
+      ? "border-l-8 rounded-sm border-green-300 shadow-md p-2"
+      : "border-l-8 rounded-sm border-red-300 shadow-md p-2";
+
   onMount(() => {
     console.log(width);
   });
@@ -29,7 +34,7 @@
   in:fly={{ duration: 800, x: width }}
   out:fade
   on:click={() => onClick(toast.id)}
-  class="border-l-8 rounded-sm {borderColor} shadow-md p-2"
+  class={className}
 >
   <div class="flex flex-col font-roboto ml-2">
     <h4 class="font-semibold text-gray-600 tracking-wider">{toast.title}</h4>
