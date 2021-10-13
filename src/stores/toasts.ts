@@ -5,18 +5,21 @@ import type { ToastMessage } from "../types";
 const INITIAL_STATE: ToastMessage[] = [
   {
     id: "1",
-    message: "Success",
+    message: "Anyone with access can view you invited visitors",
     type: "success",
+    title: "Success",
   },
   {
     id: "2",
-    message: "Warning",
+    title: "Warning",
     type: "warning",
+    message: "Anyone with access can view you invited visitors",
   },
   {
     id: "3",
-    message: "Error",
+    title: "Error",
     type: "error",
+    message: "Anyone with access can view you invited visitors",
   },
 ];
 

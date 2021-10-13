@@ -6,6 +6,9 @@ module.exports = {
   },
   darkMode: false,
   theme: {
+    fontFamily: {
+      roboto: "Roboto",
+    },
     extend: {},
   },
   variants: {
