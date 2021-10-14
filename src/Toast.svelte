@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
 
   import { fly, fade } from "svelte/transition";
+
   import type { RemoveToast } from "./stores/toasts";
 
   import type { ToastMessage, ToastMessageTypes } from "./types";
@@ -19,10 +20,23 @@
 
   const borderColor = `border-${colorsMap[toast.type]}-300`;
 
-  const className =
-    toast.type === "success"
-      ? "border-l-8 rounded-sm border-green-300 shadow-md p-2"
-      : "border-l-8 rounded-sm border-red-300 shadow-md p-2";
+  const makeClassName = (type: ToastMessageTypes) => {
+    switch (type) {
+      case "success": {
+        return "toast toast--success";
+      }
+      case "error": {
+        return "toast toast--error";
+      }
+      case "warning": {
+        return "toast toast--warning";
+      }
+      default:
+        throw new Error("Unsupported toast type");
+    }
+  };
+
+  const className = makeClassName(toast.type);
 
   onMount(() => {
     console.log(width);
@@ -41,3 +55,18 @@
     <p class="font-normal text-sm text-gray-400">{toast.message}</p>
   </div>
 </div>
+
+<style lang="postcss">
+  .toast {
+    @apply border-l-8 rounded-sm shadow-md p-2;
+  }
+  .toast--success {
+    @apply border-green-300;
+  }
+  .toast--warning {
+    @apply border-yellow-300;
+  }
+  .toast--error {
+    @apply border-red-300;
+  }
+</style>
